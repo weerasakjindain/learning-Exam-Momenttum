@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ติวสอบ นวค. กษ.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🌾 ติวสอบ นักวิเคราะห์นโยบายและแผน (กษ.)</h1>
+  <span id="bank-count"></span>
+</header>
+
+<main id="app">
+
+  <!-- ============ หน้าแรก ============ -->
+  <section id="screen-home" class="screen active">
+    <div class="card">
+      <h2>เลือกรูปแบบการฝึก</h2>
+      <div class="mode-grid">
+        <label class="mode"><input type="radio" name="mode" value="practice" checked>
+          <div><b>โหมดฝึกทำ</b><small>เฉลยทันทีทุกข้อ ไม่จับเวลา</small></div></label>
+        <label class="mode"><input type="radio" name="mode" value="exam">
+          <div><b>โหมดจำลองสอบ</b><small>จับเวลา เฉลยเมื่อส่งข้อสอบ</small></div></label>
+      </div>
+
+      <h3>หมวดเนื้อหา</h3>
+      <div id="cat-list" class="cat-list"></div>
+
+      <h3>จำนวนข้อ</h3>
+      <div class="chips" id="count-chips">
+        <button class="chip active" data-n="10">10 ข้อ</button>
+        <button class="chip" data-n="20">20 ข้อ</button>
+        <button class="chip" data-n="30">30 ข้อ</button>
+        <button class="chip" data-n="0">ทั้งหมด</button>
+      </div>
+
+      <label class="switch"><input type="checkbox" id="opt-shuffle" checked> สุ่มลำดับข้อและตัวเลือก</label>
+
+      <button class="btn-primary" id="btn-start">เริ่มทำข้อสอบ</button>
+      <button class="btn-ghost" id="btn-wrong">ติวเฉพาะข้อที่เคยผิด (<span id="wrong-count">0</span> ข้อ)</button>
+    </div>
+
+    <div class="card stat-card">
+      <h3>สถิติของคุณ</h3>
+      <div class="stats">
+        <div><b id="st-sessions">0</b><small>ครั้งที่ทำ</small></div>
+        <div><b id="st-best">-</b><small>คะแนนสูงสุด</small></div>
+        <div><b id="st-avg">-</b><small>คะแนนเฉลี่ย</small></div>
+      </div>
+      <button class="btn-link" id="btn-reset">ล้างข้อมูลทั้งหมด</button>
+    </div>
+  </section>
+
+  <!-- ============ หน้าทำข้อสอบ ============ -->
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-bar">
+      <span id="q-progress">ข้อ 1 / 10</span>
+      <span id="q-timer" class="timer"></span>
+      <button class="btn-flag" id="btn-flag">🚩 ปักธง</button>
+    </div>
+    <div class="progress"><div id="progress-fill"></div></div>
+
+    <div class="card">
+      <span class="tag" id="q-cat"></span>
+      <p class="question" id="q-text"></p>
+      <div id="q-choices" class="choices"></div>
+      <div id="q-feedback" class="feedback"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-ghost" id="btn-prev">← ข้อก่อนหน้า</button>
+      <button class="btn-primary" id="btn-next">ข้อถัดไป →</button>
+      <button class="btn-submit" id="btn-submit">ส่งคำตอบ</button>
+    </div>
+    <div id="dots" class="dots"></div>
+  </section>
+
+  <!-- ============ หน้าผลสอบ ============ -->
+  <section id="screen-result" class="screen">
+    <div class="card result-head">
+      <div id="result-ring" class="ring"><span id="result-pct">0%</span></div>
+      <h2 id="result-title"></h2>
+      <p id="result-sub"></p>
+      <div class="nav-row">
+        <button class="btn-primary" id="btn-again">ทำชุดใหม่</button>
+        <button class="btn-ghost" id="btn-home">กลับหน้าแรก</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>ผลรายหมวด</h3>
+      <table id="cat-table"></table>
+    </div>
+    <div class="card">
+      <h3>เฉลยละเอียด</h3>
+      <div id="review"></div>
+    </div>
+  </section>
+
+</main>
+<footer>ข้อมูลข้อสอบจากไฟล์ที่ผู้ใช้อัปโหลด • ใช้เพื่อการทบทวนเท่านั้น</footer>
+
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
